@@ -1,5 +1,5 @@
 namespace Clinic.Domain.Entities;
-public class  Appointment
+public class Appointment
 {
-    
+   
 }
