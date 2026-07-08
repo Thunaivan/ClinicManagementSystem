@@ -5,5 +5,11 @@
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
   </PropertyGroup>
+  <ItemGroup>
+  <ProjectReference Include="..\Clinic.Application\Clinic.Application.csproj" />
+  <ProjectReference Include="..\Clinic.Domain\Clinic.Domain.csproj" />
+  <ProjectReference Include="..\Clinic.Persistence\Clinic.Persistence.csproj" />
+  <PackageReference Include="Microsoft.EntityFrameworkCore" Version="10.0.9" />
+</ItemGroup>
 
 </Project>
