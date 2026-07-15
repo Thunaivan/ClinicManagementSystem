@@ -1,3 +1,4 @@
+using Clinic.Application.Common.Pagination;
 using Clinic.Application.Interfaces;
 using Clinic.Application.Patients;
 using Microsoft.AspNetCore.Mvc;
@@ -16,42 +17,55 @@ public class PatientsController : ControllerBase
     }
 
     [HttpPost]
-    public async Task<IActionResult> Create(CreatePatientDto dto)
+    public async Task<IActionResult> Create([FromBody] CreatePatientDto dto)
     {
         var id = await _service.CreateAsync(dto);
-        return Ok(id);
+
+        return CreatedAtAction(
+            nameof(GetById),
+            new { id },
+            new { id });
     }
 
+
     [HttpGet]
-    public async Task<IActionResult> GetAll()
+    public async Task<IActionResult> GetAll(
+    [FromQuery] PaginationParameters parameters)
     {
-        return Ok(await _service.GetAllAsync());
+        var patients = await _service.GetAllAsync(parameters);
+
+        return Ok(patients);
     }
 
     [HttpGet("{id}")]
     public async Task<IActionResult> GetById(Guid id)
     {
         var patient = await _service.GetByIdAsync(id);
-        if (patient == null) return NotFound();
+
+        if (patient == null)
+            return NotFound();
+
         return Ok(patient);
     }
 
+
+
     [HttpPut("{id}")]
-public async Task<IActionResult> Update(Guid id, UpdatePatientDto dto)
-{
-    if (id != dto.Id)
-        return BadRequest("Route id and body id do not match.");
+    public async Task<IActionResult> Update(Guid id, [FromBody] UpdatePatientDto dto)
+    {
+        if (id != dto.Id)
+            return BadRequest("Route id and body id do not match.");
 
-    await _service.UpdateAsync(dto);
+        await _service.UpdateAsync(dto);
 
-    return NoContent();
-}
+        return NoContent();
+    }
 
-[HttpDelete("{id}")]
-public async Task<IActionResult> Delete(Guid id)
-{
-    await _service.DeleteAsync(id);
+    [HttpDelete("{id}")]
+    public async Task<IActionResult> Delete(Guid id)
+    {
+        await _service.DeleteAsync(id);
 
-    return NoContent();
-}
+        return NoContent();
+    }
 }

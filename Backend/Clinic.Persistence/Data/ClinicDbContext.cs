@@ -6,7 +6,7 @@ namespace Clinic.Persistence.Data;
 public class ClinicDbContext : DbContext
 {
     public ClinicDbContext(DbContextOptions<ClinicDbContext> options)
-        : base(options)
+     : base(options)
     {
     }
 

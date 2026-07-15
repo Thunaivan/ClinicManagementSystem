@@ -2,6 +2,7 @@ using Clinic.Persistence.Data;
 using Microsoft.EntityFrameworkCore;
 using Clinic.Application.Interfaces;
 using Clinic.Infrastructure.Services;
+using Clinic.API.Middleware;
 
 
 var builder = WebApplication.CreateBuilder(args);
@@ -20,26 +21,29 @@ options.UseSqlServer(
 
 // Swagger / OpenAPI
 builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddOpenApi();
-
-builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("AngularPolicy", policy =>
+    {
+        policy.WithOrigins("http://localhost:4200")
+              .AllowAnyHeader()
+              .AllowAnyMethod();
+    });
+});
 
 var app = builder.Build();
+
+app.UseGlobalExceptionMiddleware();
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
-    app.MapOpenApi();
-
     app.UseSwagger();
-
-    app.UseSwaggerUI(options =>
-    {
-        options.SwaggerEndpoint("/openapi/v1.json", "Clinic API v1");
-    });
+    app.UseSwaggerUI();
 }
 app.UseHttpsRedirection();
+app.UseCors("AngularPolicy");
 
 app.UseAuthorization();
 
