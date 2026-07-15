@@ -5,6 +5,8 @@ using Clinic.Persistence.Data;
 using Microsoft.EntityFrameworkCore;
 using Clinic.Application.Common.Exceptions;
 using Clinic.Application.Common.Pagination;
+using Clinic.Domain.Enums;
+
 namespace Clinic.Infrastructure.Services;
 
 public class PatientService : IPatientService
@@ -24,7 +26,7 @@ public class PatientService : IPatientService
             FirstName = dto.FirstName,
             LastName = dto.LastName,
             DateOfBirth = dto.DateOfBirth,
-            Gender = (Domain.Enums.Gender)dto.Gender,
+            Gender = (Gender)dto.Gender,
             PhoneNumber = dto.PhoneNumber,
             Email = dto.Email,
             Address = dto.Address
@@ -40,25 +42,26 @@ public class PatientService : IPatientService
 
     public async Task<PagedResult<PatientDto>> GetAllAsync(PaginationParameters parameters)
     {
-        var totalRecords = await _context.Patients.CountAsync();
+        var query = _context.Patients.AsNoTracking();
+        var totalRecords = await query.CountAsync();
+
         var skip = (parameters.PageNumber - 1) * parameters.PageSize;
-        var patients = await _context.Patients
-    .AsNoTracking()
-    .OrderBy(p => p.FirstName)
-    .Skip(skip)
-    .Take(parameters.PageSize)
-    .Select(p => new PatientDto
-    {
-        Id = p.Id,
-        FirstName = p.FirstName,
-        LastName = p.LastName,
-        DateOfBirth = p.DateOfBirth,
-        Gender = (int)p.Gender,
-        PhoneNumber = p.PhoneNumber,
-        Email = p.Email,
-        Address = p.Address
-    })
-    .ToListAsync();
+        var patients = await query
+        .OrderBy(p => p.FirstName)
+        .Skip(skip)
+        .Take(parameters.PageSize)
+        .Select(p => new PatientDto
+        {
+            Id = p.Id,
+            FirstName = p.FirstName,
+            LastName = p.LastName,
+            DateOfBirth = p.DateOfBirth,
+            Gender = (int)p.Gender,
+            PhoneNumber = p.PhoneNumber,
+            Email = p.Email,
+            Address = p.Address
+        })
+        .ToListAsync();
 
         return new PagedResult<PatientDto>
         {
@@ -70,7 +73,7 @@ public class PatientService : IPatientService
         };
     }
 
-   
+
     public async Task<PatientDto?> GetByIdAsync(Guid id)
     {
         return await _context.Patients
@@ -96,14 +99,10 @@ public class PatientService : IPatientService
         if (patient == null)
             throw new NotFoundException("Patient not found.");
 
-        // if (patient == null)
-        //throw new KeyNotFoundException("Patient not found.");
-        // throw new Exception("Patient not found.");
-
         patient.FirstName = dto.FirstName;
         patient.LastName = dto.LastName;
         patient.DateOfBirth = dto.DateOfBirth;
-        patient.Gender = (Domain.Enums.Gender)dto.Gender;
+        patient.Gender = (Gender)dto.Gender;
         patient.PhoneNumber = dto.PhoneNumber;
         patient.Email = dto.Email;
         patient.Address = dto.Address;
@@ -118,7 +117,7 @@ public class PatientService : IPatientService
         var patient = await _context.Patients.FindAsync(id);
 
         if (patient == null)
-            throw new KeyNotFoundException("Patient not found.");
+            throw new NotFoundException("Patient not found.");
 
         _context.Patients.Remove(patient);
 
