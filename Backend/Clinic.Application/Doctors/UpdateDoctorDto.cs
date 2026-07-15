@@ -1,9 +1,8 @@
-using Clinic.Domain.Common;
+namespace Clinic.Application.Doctors;
 
-namespace Clinic.Domain.Entities;
-
-public class Doctor : BaseEntity
+public class UpdateDoctorDto
 {
+    public Guid Id { get; set; }
     public string FirstName { get; set; } = string.Empty;
     public string LastName { get; set; } = string.Empty;
     public string Specialization { get; set; } = string.Empty;
@@ -13,5 +12,4 @@ public class Doctor : BaseEntity
 
     public Guid DepartmentId { get; set; }
 
-    public Department Department { get; set; } = null!;
 }

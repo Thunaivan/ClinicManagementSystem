@@ -1,8 +1,6 @@
-using Clinic.Domain.Common;
+namespace Clinic.Application.Doctors;
 
-namespace Clinic.Domain.Entities;
-
-public class Doctor : BaseEntity
+public class CreateDoctorDto
 {
     public string FirstName { get; set; } = string.Empty;
     public string LastName { get; set; } = string.Empty;
@@ -12,6 +10,4 @@ public class Doctor : BaseEntity
     public int ExperienceYears { get; set; }
 
     public Guid DepartmentId { get; set; }
-
-    public Department Department { get; set; } = null!;
 }
