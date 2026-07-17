@@ -1,0 +1,43 @@
+<mat-toolbar color="primary">
+    <span>🏥 Clinic Management System</span>
+</mat-toolbar>
+
+<mat-sidenav-container class="container">
+
+    <mat-sidenav mode="side" opened>
+
+        <mat-nav-list>
+
+            <a mat-list-item routerLink="/patients">
+                <mat-icon>people</mat-icon>
+                <span>Patients</span>
+            </a>
+
+            <a mat-list-item>
+                <mat-icon>medical_services</mat-icon>
+                <span>Doctors</span>
+            </a>
+
+            <a mat-list-item>
+                <mat-icon>business</mat-icon>
+                <span>Departments</span>
+            </a>
+
+            <a mat-list-item>
+                <mat-icon>event</mat-icon>
+                <span>Appointments</span>
+            </a>
+
+        </mat-nav-list>
+
+    </mat-sidenav>
+
+    <mat-sidenav-content>
+
+        <div class="content">
+            <router-outlet></router-outlet>
+        </div>
+
+    </mat-sidenav-content>
+
+</mat-sidenav-container>
