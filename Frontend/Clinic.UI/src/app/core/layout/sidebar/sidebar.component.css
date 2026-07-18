@@ -1,0 +1,19 @@
+:host {
+    display: block;
+    width: 260px;
+    background: #fafafa;
+    border-right: 1px solid #ddd;
+}
+
+.sidebar {
+    height: 100%;
+    padding-top: 20px;
+}
+
+mat-nav-list {
+    padding-top: 10px;
+}
+
+a[mat-list-item] {
+    margin-bottom: 8px;
+}

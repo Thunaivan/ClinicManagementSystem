@@ -1,0 +1,8 @@
+.spacer{
+    flex:1;
+}
+
+.title{
+    font-size:30px;
+    font-weight:bold;
+}

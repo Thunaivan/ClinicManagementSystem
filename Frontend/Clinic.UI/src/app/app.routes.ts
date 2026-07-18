@@ -1,14 +1,14 @@
 import { Routes } from '@angular/router';
-import { PatientList } from './features/patients/components/patient-list/patient-list';
+import { PatientListComponent } from './features/patients/components/patient-list/patient-list.component';
 
 export const routes: Routes = [
   {
     path: '',
     redirectTo: 'patients',
-    pathMatch: 'full'
+    pathMatch: 'full',
   },
   {
     path: 'patients',
-    component: PatientList
-  }
+    component: PatientListComponent,
+  },
 ];

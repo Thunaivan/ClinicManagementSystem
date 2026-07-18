@@ -10,10 +10,10 @@ import { MatButtonModule } from '@angular/material/button';
   imports: [CommonModule,
     MatButtonModule
   ],
-  templateUrl: './patient-list.html',
-  styleUrl: './patient-list.css',
+  templateUrl: './patient-list.component..html',
+  styleUrl: './patient-list.component..css',
 })
-export class PatientList {
+export class PatientListComponent {
   patients: Patient[] = [];
   totalRecords = 0;
   pageNumber = 1;
