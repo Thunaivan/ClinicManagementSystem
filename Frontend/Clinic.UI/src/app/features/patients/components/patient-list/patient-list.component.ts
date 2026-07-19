@@ -10,8 +10,8 @@ import { MatButtonModule } from '@angular/material/button';
   imports: [CommonModule,
     MatButtonModule
   ],
-  templateUrl: './patient-list.component..html',
-  styleUrl: './patient-list.component..css',
+  templateUrl: './patient-list.component.html',
+  styleUrl: './patient-list.component.css',
 })
 export class PatientListComponent {
   patients: Patient[] = [];
