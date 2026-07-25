@@ -1,3 +1,5 @@
+using Clinic.Domain.Enums;
+
 namespace Clinic.Application.Patients;
 
 public class UpdatePatientDto
@@ -10,7 +12,7 @@ public class UpdatePatientDto
 
     public DateOnly DateOfBirth { get; set; }
 
-    public int Gender { get; set; }
+    public Gender Gender { get; set; }
 
     public string PhoneNumber { get; set; } = string.Empty;
 

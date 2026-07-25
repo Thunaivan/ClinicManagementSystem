@@ -38,7 +38,7 @@ public class PatientsController : ControllerBase
     }
 
     [HttpGet("{id}")]
-    public async Task<IActionResult> GetById(Guid id)
+    public async Task<ActionResult<PatientDto>> GetById(Guid id)
     {
         var patient = await _service.GetByIdAsync(id);
 

@@ -5,7 +5,7 @@ using Clinic.Persistence.Data;
 using Microsoft.EntityFrameworkCore;
 using Clinic.Application.Common.Exceptions;
 using Clinic.Application.Common.Pagination;
-using Clinic.Domain.Enums;
+
 
 namespace Clinic.Infrastructure.Services;
 
@@ -26,7 +26,7 @@ public class PatientService : IPatientService
             FirstName = dto.FirstName,
             LastName = dto.LastName,
             DateOfBirth = dto.DateOfBirth,
-            Gender = (Gender)dto.Gender,
+            Gender = dto.Gender,
             PhoneNumber = dto.PhoneNumber,
             Email = dto.Email,
             Address = dto.Address
@@ -56,7 +56,7 @@ public class PatientService : IPatientService
             FirstName = p.FirstName,
             LastName = p.LastName,
             DateOfBirth = p.DateOfBirth,
-            Gender = (int)p.Gender,
+            Gender = p.Gender,
             PhoneNumber = p.PhoneNumber,
             Email = p.Email,
             Address = p.Address
@@ -85,12 +85,12 @@ public class PatientService : IPatientService
                 FirstName = p.FirstName,
                 LastName = p.LastName,
                 DateOfBirth = p.DateOfBirth,
-                Gender = (int)p.Gender,
+                Gender = p.Gender,
                 PhoneNumber = p.PhoneNumber,
                 Email = p.Email,
                 Address = p.Address
             })
-            .FirstOrDefaultAsync();
+            .SingleOrDefaultAsync();
     }
     public async Task UpdateAsync(UpdatePatientDto dto)
     {
@@ -102,7 +102,7 @@ public class PatientService : IPatientService
         patient.FirstName = dto.FirstName;
         patient.LastName = dto.LastName;
         patient.DateOfBirth = dto.DateOfBirth;
-        patient.Gender = (Gender)dto.Gender;
+        patient.Gender = dto.Gender;
         patient.PhoneNumber = dto.PhoneNumber;
         patient.Email = dto.Email;
         patient.Address = dto.Address;
