@@ -5,7 +5,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatListModule } from '@angular/material/list';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatToolbarModule } from '@angular/material/toolbar';
-import { RouterLink, RouterOutlet } from '@angular/router';
+import {  RouterOutlet } from '@angular/router';
 import { HeaderComponent } from '../header/header.component';
 import { SidebarComponent } from '../sidebar/sidebar.component';
 
@@ -16,7 +16,6 @@ import { SidebarComponent } from '../sidebar/sidebar.component';
     HeaderComponent,
     SidebarComponent,
     RouterOutlet,
-    RouterLink,
     MatToolbarModule,
     MatSidenavModule,
     MatListModule,
