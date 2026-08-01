@@ -1,8 +1,8 @@
-export interface CreatePatient {
+export interface PatientFormModel {
   firstName: string;
   lastName: string;
   gender: number;
-  dateOfBirth: string;
+  dateOfBirth: Date;
   phoneNumber: string;
   email: string;
   address: string;

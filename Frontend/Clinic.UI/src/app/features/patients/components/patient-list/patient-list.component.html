@@ -18,9 +18,7 @@
 
       <mat-label>Search Patient</mat-label>
 
-      <input
-        matInput
-        placeholder="Enter name or phone">
+      <input matInput placeholder="Enter name or phone">
 
       <mat-icon matSuffix>
         search
@@ -28,9 +26,7 @@
 
     </mat-form-field>
 
-    <button
-      mat-raised-button
-      color="primary">
+    <button mat-raised-button (click)="addPatient()" color="primary">
 
       <mat-icon>add</mat-icon>
 
@@ -64,7 +60,7 @@
     <ng-container matColumnDef="gender">
       <th mat-header-cell *matHeaderCellDef>Gender</th>
       <td mat-cell *matCellDef="let patient">
-        {{patient.gender}}
+        {{ getGender(patient.gender) }}
       </td>
     </ng-container>
 

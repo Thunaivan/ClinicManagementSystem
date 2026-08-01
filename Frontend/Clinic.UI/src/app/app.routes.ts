@@ -6,9 +6,15 @@ export const routes: Routes = [
   {
     path: '',
     component: DashboardComponent,
-  },
+  },  
   {
     path: 'patients',
     component: PatientListComponent,
   },
+  {
+  path: 'patients/create',
+  loadComponent: () =>
+    import('./features/patients/components/create-patient/create-patient.component')
+      .then(m => m.CreatePatientComponent)
+}
 ];

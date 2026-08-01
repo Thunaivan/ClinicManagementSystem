@@ -8,6 +8,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { PatientService } from '../../services/patient.service';
 import { Patient } from '../../models/patient';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-patient-list',
@@ -30,7 +31,10 @@ export class PatientListComponent implements OnInit {
   totalRecords = 0;
   pageNumber = 1;
   pageSize = 10;
-  constructor(private readonly patientService: PatientService) {}
+  constructor(
+    private readonly patientService: PatientService,
+    private router: Router,
+  ) {}
   ngOnInit(): void {
     this.loadPatients();
   }
@@ -46,6 +50,22 @@ export class PatientListComponent implements OnInit {
       error: (err) => console.error(err),
     });
   }
+   //  Add the helper method here
+  getGender(gender: number): string {
+    switch (gender) {
+      case 1:
+        return 'Male';
+      case 2:
+        return 'Female';
+      case 3:
+        return 'Other';
+      default:
+        return 'Unknown';
+    }
+  }
+  addPatient(): void {
+  this.router.navigate(['/patients/create']);
+}
   editPatient(patient: Patient) {}
 
   deletePatient(patient: Patient) {}

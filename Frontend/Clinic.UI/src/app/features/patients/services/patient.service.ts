@@ -4,16 +4,20 @@ import { environment } from '../../../../environments/environment';
 import { Observable } from 'rxjs';
 import { Patient } from '../models/patient';
 import { PagedResult } from '../../../shared/models/paged-result';
+import { CreatePatient } from '../models/create-patient';
 @Injectable({
   providedIn: 'root',
 })
 export class PatientService {
-  private apiUrl = `${environment.apiUrl}/Patients`;
+  private readonly apiUrl = `${environment.apiUrl}/Patients`;
 
-  constructor(private http: HttpClient) {}
+  constructor(private readonly http: HttpClient) {}
   getPatients(pageNumber: number, pageSize: number): Observable<PagedResult<Patient>> {
     const params = new HttpParams().set('pageNumber', pageNumber).set('pageSize', pageSize);
 
     return this.http.get<PagedResult<Patient>>(this.apiUrl, { params });
+  }
+  createPatient(patient: CreatePatient): Observable<Patient> {
+    return this.http.post<Patient>(this.apiUrl, patient);
   }
 }
