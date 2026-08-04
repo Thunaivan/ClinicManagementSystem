@@ -1,11 +1,281 @@
+/* ===========================
+   Page Layout
+=========================== */
+
+:host {
+  display: block;
+  height: 100%;
+}
+
+.patient-page {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  min-height: 0;
+  padding: 16px 20px;
+  box-sizing: border-box;
+}
+
+/* ===========================
+   Header
+=========================== */
+
+.page-title-section {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.page-title-section h1 {
+  margin: 0;
+  font-size: 30px;
+  font-weight: 700;
+  color: #1f2937;
+}
+
+.page-title-section p {
+  margin: 6px 0 0;
+  font-size: 14px;
+  color: #6b7280;
+}
+
+.patient-summary {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  background: #ffffff;
+  border-radius: 12px;
+  padding: 14px 18px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, .08);
+}
+
+.patient-summary mat-icon {
+  width: 36px;
+  height: 36px;
+  font-size: 36px;
+}
+
+.patient-summary div {
+  display: flex;
+  flex-direction: column;
+}
+
+.patient-summary .count {
+  font-size: 24px;
+  font-weight: 700;
+  line-height: 1;
+}
+
+.patient-summary small {
+  color: #6b7280;
+  font-size: 13px;
+}
+
+.header-right {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+
+.search-box {
+  width: 360px;
+  max-width: 100%;
+}
+
+.search-box .mat-mdc-form-field-subscript-wrapper {
+  display: none;
+}
+
+/* ===========================
+   Card
+=========================== */
+
+
+
+mat-card {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  min-height: 0;
+  border-radius: 14px;
+}
+
+mat-card-content {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  padding: 0;
+  overflow: hidden;
+}
+
+/* ===========================
+   Table
+=========================== */
+
+
+.table-container {
+  flex: 1;
+  min-height: 0;
+  overflow: auto;
+}
+
 table {
   width: 100%;
 }
 
-mat-card {
-  margin: 20px;
+.mat-mdc-header-row {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  background: white;
 }
 
+.mat-mdc-row:hover {
+  background: #f8fafc;
+  cursor: pointer;
+  transform: translateX(3px);
+  transition: .15s;
+}
+
+/* ===========================
+   Columns
+=========================== */
+
 .mat-column-actions {
-  width: 140px;
+  width: 110px;
+  text-align: center;
+}
+
+.mat-column-gender {
+  width: 120px;
+}
+
+.mat-column-phone {
+  width: 170px;
+}
+
+/* ===========================
+   Paginator
+=========================== */
+
+mat-paginator {
+  border-top: 1px solid #e5e7eb;
+  flex-shrink: 0;
+}
+
+.toolbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 20px;
+}
+
+.patient-info {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.patient-avatar {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: #e8f0fe;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.patient-avatar mat-icon {
+  color: #1976d2;
+}
+
+.patient-details {
+  display: flex;
+  flex-direction: column;
+}
+
+.patient-name {
+  font-weight: 600;
+  font-size: 15px;
+  color: #1f2937;
+}
+
+.patient-id {
+  font-size: 12px;
+  color: #6b7280;
+}
+
+.gender-chip {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  min-width: 72px;
+
+  padding: 6px 14px;
+
+  border-radius: 20px;
+
+  font-size: 13px;
+
+  font-weight: 600;
+}
+
+.gender-chip.male {
+  background: #E3F2FD;
+  color: #1565C0;
+}
+
+.gender-chip.female {
+  background: #FCE4EC;
+  color: #AD1457;
+}
+
+.gender-chip.other {
+  background: #FFF8E1;
+  color: #F57F17;
+}
+
+.action-buttons {
+  display: flex;
+  gap: 8px;
+}
+
+.action-buttons button {
+
+  width: 40px;
+  height: 40px;
+
+  border-radius: 50%;
+
+  transition: .2s;
+}
+
+.action-buttons button:hover {
+
+  transform: scale(1.08);
+}
+
+@media (max-width: 768px) {
+
+  .page-title-section {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 16px;
+  }
+
+  .toolbar {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .search-box {
+    width: 100%;
+  }
+
+  .patient-summary {
+    justify-content: center;
+  }
 }

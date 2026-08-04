@@ -9,7 +9,7 @@ import { MatInputModule } from '@angular/material/input';
 import { PatientService } from '../../services/patient.service';
 import { Patient } from '../../models/patient';
 import { Router } from '@angular/router';
-
+import { MatPaginatorModule, PageEvent } from '@angular/material/paginator';
 @Component({
   selector: 'app-patient-list',
   standalone: true,
@@ -21,13 +21,19 @@ import { Router } from '@angular/router';
     MatIconModule,
     MatFormFieldModule,
     MatInputModule,
+     MatPaginatorModule
   ],
   templateUrl: './patient-list.component.html',
   styleUrl: './patient-list.component.css',
 })
 export class PatientListComponent implements OnInit {
   patients: Patient[] = [];
-  displayedColumns: string[] = ['firstName', 'lastName', 'gender', 'phone', 'actions'];
+  displayedColumns = [
+'patient',
+'gender',
+'phone',
+'actions'
+];
   totalRecords = 0;
   pageNumber = 1;
   pageSize = 10;
@@ -38,18 +44,21 @@ export class PatientListComponent implements OnInit {
   ngOnInit(): void {
     this.loadPatients();
   }
-  loadPatients(): void {
-    this.patientService.getPatients(this.pageNumber, this.pageSize).subscribe({
+ loadPatients(): void {
+  this.patientService.getPatients(this.pageNumber, this.pageSize)
+    .subscribe({
       next: (result) => {
-        this.patients = result.data;
-        this.totalRecords = result.totalRecords;
-        this.pageNumber = result.pageNumber;
-        this.pageSize = result.pageSize;
+          console.log("API Result:", result);
+       this.patients = result.data;
+  this.totalRecords = result.totalRecords;
+  this.pageNumber = result.pageNumber;
+  this.pageSize = result.pageSize;
+         console.log("Total Records:", this.totalRecords);
       },
 
       error: (err) => console.error(err),
     });
-  }
+}
    //  Add the helper method here
   getGender(gender: number): string {
     switch (gender) {
@@ -69,4 +78,10 @@ export class PatientListComponent implements OnInit {
   editPatient(patient: Patient) {}
 
   deletePatient(patient: Patient) {}
+
+  onPageChange(event: PageEvent): void {
+  this.pageNumber = event.pageIndex + 1;
+  this.pageSize = event.pageSize;
+  this.loadPatients();
+}
 }
