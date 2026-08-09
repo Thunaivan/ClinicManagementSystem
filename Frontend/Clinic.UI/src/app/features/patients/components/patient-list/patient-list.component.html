@@ -122,26 +122,29 @@
 
       <td mat-cell *matCellDef="let patient">
 
-        <button
-    mat-icon-button
-    color="primary"
-    matTooltip="Edit Patient">
+  <div class="action-buttons">
 
-    <mat-icon>edit</mat-icon>
+    <button
+      mat-icon-button
+      color="primary"
+      matTooltip="Edit Patient">
 
-</button>
+      <mat-icon>edit</mat-icon>
 
-<button
-    mat-icon-button
-    color="warn"
-    matTooltip="Delete Patient">
+    </button>
 
-    <mat-icon>delete</mat-icon>
+    <button
+      mat-icon-button
+      color="warn"
+      matTooltip="Delete Patient">
 
-</button>
+      <mat-icon>delete</mat-icon>
 
-      </td>
+    </button>
 
+  </div>
+
+</td>
     </ng-container>
 
     <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>

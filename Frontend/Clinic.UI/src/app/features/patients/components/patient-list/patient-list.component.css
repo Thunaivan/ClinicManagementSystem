@@ -7,12 +7,13 @@
   height: 100%;
 }
 
+
 .patient-page {
   display: flex;
   flex-direction: column;
   height: 100%;
   min-height: 0;
-  padding: 16px 20px;
+  padding: 12px 20px;
   box-sizing: border-box;
 }
 
@@ -61,10 +62,11 @@
 }
 
 .patient-summary .count {
-  font-size: 24px;
+  font-size: 22px;
   font-weight: 700;
   line-height: 1;
 }
+
 
 .patient-summary small {
   color: #6b7280;
@@ -93,29 +95,31 @@
 
 
 
+
 mat-card {
   display: flex;
   flex-direction: column;
-  flex: 1;
+  flex: 1 1 auto;
   min-height: 0;
   border-radius: 14px;
+  overflow: hidden;
 }
+
 
 mat-card-content {
   display: flex;
   flex-direction: column;
-  flex: 1;
+  flex: 1 1 auto;
+  min-height: 0;
   padding: 0;
   overflow: hidden;
 }
-
 /* ===========================
    Table
 =========================== */
 
-
 .table-container {
-  flex: 1;
+  flex: 1 1 auto;
   min-height: 0;
   overflow: auto;
 }
@@ -131,13 +135,11 @@ table {
   background: white;
 }
 
+
 .mat-mdc-row:hover {
   background: #f8fafc;
   cursor: pointer;
-  transform: translateX(3px);
-  transition: .15s;
 }
-
 /* ===========================
    Columns
 =========================== */
@@ -158,7 +160,9 @@ table {
 /* ===========================
    Paginator
 =========================== */
-
+.top-paginator {
+  flex: 0 0 auto;
+}
 mat-paginator {
   border-top: 1px solid #e5e7eb;
   flex-shrink: 0;
