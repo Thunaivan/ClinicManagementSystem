@@ -5,6 +5,7 @@ import { Observable } from 'rxjs';
 import { Patient } from '../models/patient';
 import { PagedResult } from '../../../shared/models/paged-result';
 import { CreatePatient } from '../models/create-patient';
+import { UpdatePatient } from '../models/update-patient';
 @Injectable({
   providedIn: 'root',
 })
@@ -17,7 +18,17 @@ export class PatientService {
 
     return this.http.get<PagedResult<Patient>>(this.apiUrl, { params });
   }
-  createPatient(patient: CreatePatient): Observable<Patient> {
-    return this.http.post<Patient>(this.apiUrl, patient);
+  createPatient(patient: CreatePatient): Observable<void> {
+    return this.http.post<void>(this.apiUrl, patient);
   }
+
+    updatePatient(patient: UpdatePatient): Observable<void> {
+    return this.http.put<void>(
+      `${this.apiUrl}/${patient.id}`,
+      patient
+    );
+  }
+  getPatientById(id: string): Observable<Patient> {
+  return this.http.get<Patient>(`${this.apiUrl}/${id}`);
+}
 }

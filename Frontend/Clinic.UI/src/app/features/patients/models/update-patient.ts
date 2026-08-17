@@ -2,8 +2,9 @@ export interface UpdatePatient {
   id: string;
   firstName: string;
   lastName: string;
-  gender: string;
-  dateOfBirth: Date;
-  mobileNumber: string;
+  dateOfBirth: string;
+  gender: number;
+  phoneNumber: string;
   email: string;
+  address: string;
 }
