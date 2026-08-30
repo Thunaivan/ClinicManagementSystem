@@ -14,6 +14,7 @@ export class PatientService {
 
   constructor(private readonly http: HttpClient) {}
   getPatients(pageNumber: number, pageSize: number): Observable<PagedResult<Patient>> {
+   
     const params = new HttpParams().set('pageNumber', pageNumber).set('pageSize', pageSize);
 
     return this.http.get<PagedResult<Patient>>(this.apiUrl, { params });
@@ -30,5 +31,8 @@ export class PatientService {
   }
   getPatientById(id: string): Observable<Patient> {
   return this.http.get<Patient>(`${this.apiUrl}/${id}`);
+}
+deletePatient(id: string): Observable<void> {
+  return this.http.delete<void>(`${this.apiUrl}/${id}`);
 }
 }

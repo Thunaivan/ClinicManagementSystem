@@ -10,6 +10,8 @@ import { PatientService } from '../../services/patient.service';
 import { Patient } from '../../models/patient';
 import { Router } from '@angular/router';
 import { MatPaginatorModule, PageEvent } from '@angular/material/paginator';
+import { MatDialog, MatDialogModule } from '@angular/material/dialog';
+import { ConfirmDialogComponent } from '../../../../shared/components/confirm-dialog/confirm-dialog.component';
 @Component({
   selector: 'app-patient-list',
   standalone: true,
@@ -21,7 +23,9 @@ import { MatPaginatorModule, PageEvent } from '@angular/material/paginator';
     MatIconModule,
     MatFormFieldModule,
     MatInputModule,
-     MatPaginatorModule
+     MatPaginatorModule,
+     MatDialogModule,
+      ConfirmDialogComponent,
   ],
   templateUrl: './patient-list.component.html',
   styleUrl: './patient-list.component.css',
@@ -39,7 +43,7 @@ export class PatientListComponent implements OnInit {
   pageSize = 10;
   constructor(
     private readonly patientService: PatientService,
-    private router: Router,
+    private router: Router, private readonly dialog: MatDialog
   ) {}
   ngOnInit(): void {
     this.loadPatients();
@@ -79,7 +83,35 @@ export class PatientListComponent implements OnInit {
      this.router.navigate(['/patients/edit', patient.id]);
   }
 
-  deletePatient(patient: Patient) {}
+deletePatient(patient: Patient): void {
+
+  const dialogRef = this.dialog.open(ConfirmDialogComponent, {
+    width: '400px',
+    data: {
+      title: 'Delete Patient',
+      message: `Are you sure you want to delete ${patient.firstName} ${patient.lastName}?`,
+      confirmText: 'Delete',
+      cancelText: 'Cancel'
+    }
+  });
+
+  dialogRef.afterClosed().subscribe((confirmed) => {
+
+    if (!confirmed) {
+      return;
+    }
+
+    this.patientService.deletePatient(patient.id).subscribe({
+      next: () => {
+        this.loadPatients();
+      },
+      error: () => {
+        window.alert('Unable to delete patient.');
+      }
+    });
+
+  });
+}
 
   onPageChange(event: PageEvent): void {
   this.pageNumber = event.pageIndex + 1;
