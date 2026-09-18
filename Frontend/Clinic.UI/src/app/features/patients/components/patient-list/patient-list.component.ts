@@ -12,6 +12,7 @@ import { Router } from '@angular/router';
 import { MatPaginatorModule, PageEvent } from '@angular/material/paginator';
 import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 import { ConfirmDialogComponent } from '../../../../shared/components/confirm-dialog/confirm-dialog.component';
+import { CommonPanelComponent } from '../../../../shared/components/common-panel/common-panel.component';
 @Component({
   selector: 'app-patient-list',
   standalone: true,
@@ -26,6 +27,7 @@ import { ConfirmDialogComponent } from '../../../../shared/components/confirm-di
      MatPaginatorModule,
      MatDialogModule,
       ConfirmDialogComponent,
+      CommonPanelComponent
   ],
   templateUrl: './patient-list.component.html',
   styleUrl: './patient-list.component.css',

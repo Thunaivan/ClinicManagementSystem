@@ -1,12 +1,7 @@
-<div class="patient-page">
-<div class="page-header">
+<app-common-panel title="Patients">
 
-  <div class="page-title-section">
-
-    <div>
-      <h1>Patients</h1>
-      <p>Manage patient records and registrations</p>
-    </div>
+  <!-- Header action -->
+  <div panel-actions>
 
     <button
       mat-raised-button
@@ -20,143 +15,199 @@
 
   </div>
 
-  <div class="toolbar">
 
-    <div class="patient-summary">
-      <mat-icon color="primary">groups</mat-icon>
-      <div>
-        <span class="count">{{ totalRecords }}</span>
-        <small>Total Patients</small>
-      </div>
-    </div>
+  <!-- Patient page content -->
+  <div class="patient-page">
 
-    <mat-form-field appearance="outline" class="search-box">
-      <mat-icon matPrefix>search</mat-icon>
-      <input
-        matInput
-        placeholder="Search patients..." />
-    </mat-form-field>
-
-  </div>
-
-</div>
-<mat-card>
+    <!-- <div class="page-description">
+      <p>Manage patient records and registrations</p>
+    </div> -->
 
 
-   <mat-card-content>
-    <!-- Top Pagination -->
-    <div class="top-paginator">
-      <mat-paginator
-        [length]="totalRecords"
-        [pageSize]="pageSize"
-        [pageSizeOptions]="[5, 10, 20, 50]"
-        [pageIndex]="pageNumber - 1"
-        showFirstLastButtons
-        (page)="onPageChange($event)">
-      </mat-paginator>
-    </div>
-  <div class="table-container">
+    <div class="toolbar">
 
-  <table mat-table [dataSource]="patients" class="mat-elevation-z2">
+      <div class="patient-summary">
 
-    <ng-container matColumnDef="patient">
-  <th mat-header-cell *matHeaderCellDef>Patient</th>
+        <mat-icon color="primary">groups</mat-icon>
 
-  <td mat-cell *matCellDef="let patient">
-
-    <div class="patient-info">
-
-      <div class="patient-avatar">
-        <mat-icon>person</mat-icon>
-      </div>
-
-      <div class="patient-details">
-
-        <div class="patient-name">
-          {{ patient.firstName }} {{ patient.lastName }}
+        <div>
+          <span class="count">{{ totalRecords }}</span>
+          <small>Total Patients</small>
         </div>
 
-        <!-- <div class="patient-id">
-          ID : {{ patient.id }}
-        </div> -->
-
       </div>
+
+
+      <mat-form-field
+        appearance="outline"
+        class="search-box">
+
+        <mat-icon matPrefix>search</mat-icon>
+
+        <input
+          matInput
+          placeholder="Search patients..." />
+
+      </mat-form-field>
 
     </div>
 
-  </td>
-</ng-container>
-<ng-container matColumnDef="gender">
 
-  <th mat-header-cell *matHeaderCellDef>
-    Gender
-  </th>
+    <mat-card>
 
-  <td mat-cell *matCellDef="let patient">
+      <mat-card-content>
 
-    <span
-      class="gender-chip"
-      [ngClass]="{
-        'male': patient.gender === 1,
-        'female': patient.gender === 2,
-        'other': patient.gender === 3
-      }">
+        <!-- Top Pagination -->
+        <div class="top-paginator">
 
-      {{ getGender(patient.gender) }}
+          <mat-paginator
+            [length]="totalRecords"
+            [pageSize]="pageSize"
+            [pageSizeOptions]="[5, 10, 20, 50]"
+            [pageIndex]="pageNumber - 1"
+            showFirstLastButtons
+            (page)="onPageChange($event)">
+          </mat-paginator>
 
-    </span>
+        </div>
 
-  </td>
 
-</ng-container>
+        <div class="table-container">
 
-    <ng-container matColumnDef="phone">
-      <th mat-header-cell *matHeaderCellDef>Phone</th>
-      <td mat-cell *matCellDef="let patient">
-        {{patient.phoneNumber}}
-      </td>
-    </ng-container>
+          <table
+            mat-table
+            [dataSource]="patients"
+            class="mat-elevation-z2">
 
-    <ng-container matColumnDef="actions">
-      <th mat-header-cell *matHeaderCellDef>Actions</th>
 
-      <td mat-cell *matCellDef="let patient">
+            <!-- Patient -->
+            <ng-container matColumnDef="patient">
 
-  <div class="action-buttons">
+              <th mat-header-cell *matHeaderCellDef>
+                Patient
+              </th>
 
-    <button
-  mat-icon-button
-  color="primary"
-  matTooltip="Edit Patient"
-  (click)="editPatient(patient)">
+              <td mat-cell *matCellDef="let patient">
 
-  <mat-icon>edit</mat-icon>
+                <div class="patient-info">
 
-</button>
-    <button
-      mat-icon-button
-      color="warn"
-      
-       (click)="deletePatient(patient)"
+                  <div class="patient-avatar">
+                    <mat-icon>person</mat-icon>
+                  </div>
 
-      matTooltip="Delete Patient">
+                  <div class="patient-details">
 
-      <mat-icon>delete</mat-icon>
+                    <div class="patient-name">
+                      {{ patient.firstName }}
+                      {{ patient.lastName }}
+                    </div>
 
-    </button>
+                  </div>
+
+                </div>
+
+              </td>
+
+            </ng-container>
+
+
+            <!-- Gender -->
+            <ng-container matColumnDef="gender">
+
+              <th mat-header-cell *matHeaderCellDef>
+                Gender
+              </th>
+
+              <td mat-cell *matCellDef="let patient">
+
+                <span
+                  class="gender-chip"
+                  [ngClass]="{
+                    'male': patient.gender === 1,
+                    'female': patient.gender === 2,
+                    'other': patient.gender === 3
+                  }">
+
+                  {{ getGender(patient.gender) }}
+
+                </span>
+
+              </td>
+
+            </ng-container>
+
+
+            <!-- Phone -->
+            <ng-container matColumnDef="phone">
+
+              <th mat-header-cell *matHeaderCellDef>
+                Phone
+              </th>
+
+              <td mat-cell *matCellDef="let patient">
+                {{ patient.phoneNumber }}
+              </td>
+
+            </ng-container>
+
+
+            <!-- Actions -->
+            <ng-container matColumnDef="actions">
+
+              <th mat-header-cell *matHeaderCellDef>
+                Actions
+              </th>
+
+              <td mat-cell *matCellDef="let patient">
+
+                <div class="action-buttons">
+
+                  <button
+                    mat-icon-button
+                    color="primary"
+                    matTooltip="Edit Patient"
+                    (click)="editPatient(patient)">
+
+                    <mat-icon>edit</mat-icon>
+
+                  </button>
+
+
+                  <button
+                    mat-icon-button
+                    color="warn"
+                    matTooltip="Delete Patient"
+                    (click)="deletePatient(patient)">
+
+                    <mat-icon>delete</mat-icon>
+
+                  </button>
+
+                </div>
+
+              </td>
+
+            </ng-container>
+
+
+            <tr
+              mat-header-row
+              *matHeaderRowDef="displayedColumns; sticky: true">
+            </tr>
+
+            <tr
+              mat-row
+              *matRowDef="let row; columns: displayedColumns;">
+            </tr>
+
+          </table>
+
+        </div>
+
+      </mat-card-content>
+
+    </mat-card>
 
   </div>
 
-</td>
-    </ng-container>
-
-    <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
-
-    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-
-  </table>
-  </div>
-  
-</mat-card-content>
-</mat-card>
-</div>
+</app-common-panel>

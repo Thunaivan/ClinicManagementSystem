@@ -1,0 +1,15 @@
+<div class="common-panel">
+
+  <div class="panel-header">
+    <h2>{{ title }}</h2>
+
+    <div class="panel-actions">
+      <ng-content select="[panel-actions]"></ng-content>
+    </div>
+  </div>
+
+  <div class="panel-content">
+    <ng-content></ng-content>
+  </div>
+
+</div>
