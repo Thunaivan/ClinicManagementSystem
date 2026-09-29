@@ -9,5 +9,6 @@ public class Department : BaseEntity
     public string PhoneNumber { get; set; } = string.Empty;
     public string HeadOfDepartment { get; set; } = string.Empty;
 
-    public ICollection<Doctor> Doctors { get; set; } = new List<Doctor>();
+    public ICollection<DoctorDepartment> DoctorDepartments { get; set; }
+        = new List<DoctorDepartment>();
 }
