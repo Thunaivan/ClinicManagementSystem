@@ -5,12 +5,14 @@ using Clinic.Infrastructure.Services;
 using Clinic.API.Middleware;
 
 
+
 var builder = WebApplication.CreateBuilder(args);
 
 // add service s to the controllers
 builder.Services.AddControllers();
 
 builder.Services.AddScoped<IPatientService, PatientService>();
+builder.Services.AddScoped<IDoctorService, DoctorService>();
 // Register enttity framework core
 builder.Services.AddDbContext<ClinicDbContext>(options =>
 options.UseSqlServer(
