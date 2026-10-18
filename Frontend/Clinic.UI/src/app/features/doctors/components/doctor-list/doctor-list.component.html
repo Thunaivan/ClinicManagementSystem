@@ -1,0 +1,160 @@
+<app-common-panel title="Doctors">
+
+  <div panel-actions>
+    <button
+      mat-raised-button
+      color="primary"
+      (click)="addDoctor()">
+
+      <mat-icon>add</mat-icon>
+      Add Doctor
+    </button>
+  </div>
+
+  <div class="doctor-page">
+
+    <div class="toolbar">
+
+      <div class="doctor-summary">
+        <mat-icon color="primary">medical_services</mat-icon>
+
+        <div>
+          <span class="count">{{ totalRecords }}</span>
+          <small>Total Doctors</small>
+        </div>
+      </div>
+
+      <mat-form-field appearance="outline" class="search-box">
+        <mat-icon matPrefix>search</mat-icon>
+        <input
+          matInput
+          placeholder="Search doctors..." />
+      </mat-form-field>
+
+    </div>
+
+    <mat-card>
+      <mat-card-content>
+
+        <div class="top-paginator">
+          <mat-paginator
+            [length]="totalRecords"
+            [pageSize]="pageSize"
+            [pageSizeOptions]="[5, 10, 20, 50]"
+            [pageIndex]="pageNumber - 1"
+            showFirstLastButtons
+            (page)="onPageChange($event)">
+          </mat-paginator>
+        </div>
+
+        <div class="table-container">
+
+          <table
+            mat-table
+            [dataSource]="doctors"
+            class="mat-elevation-z2">
+
+            <!-- Doctor -->
+            <ng-container matColumnDef="doctor">
+              <th mat-header-cell *matHeaderCellDef>
+                Doctor
+              </th>
+
+              <td mat-cell *matCellDef="let doctor">
+                <div class="doctor-info">
+                  <div class="doctor-avatar">
+                    <mat-icon>person</mat-icon>
+                  </div>
+
+                  <div class="doctor-details">
+                    <div class="doctor-name">
+                      {{ doctor.firstName }} {{ doctor.lastName }}
+                    </div>
+                    <small>{{ doctor.doctorCode }}</small>
+                  </div>
+                </div>
+              </td>
+            </ng-container>
+
+            <!-- Specialization -->
+            <ng-container matColumnDef="specialization">
+              <th mat-header-cell *matHeaderCellDef>
+                Specialization
+              </th>
+
+              <td mat-cell *matCellDef="let doctor">
+                {{ doctor.specialization }}
+              </td>
+            </ng-container>
+
+            <!-- Phone -->
+            <ng-container matColumnDef="phone">
+              <th mat-header-cell *matHeaderCellDef>
+                Phone
+              </th>
+
+              <td mat-cell *matCellDef="let doctor">
+                {{ doctor.phoneNumber }}
+              </td>
+            </ng-container>
+
+            <!-- Departments -->
+            <ng-container matColumnDef="departments">
+              <th mat-header-cell *matHeaderCellDef>
+                Departments
+              </th>
+
+              <td mat-cell *matCellDef="let doctor">
+                {{ getDepartmentNames(doctor) }}
+              </td>
+            </ng-container>
+
+            <!-- Actions -->
+            <ng-container matColumnDef="actions">
+              <th mat-header-cell *matHeaderCellDef>
+                Actions
+              </th>
+
+              <td mat-cell *matCellDef="let doctor">
+                <div class="action-buttons">
+
+                  <button
+                    mat-icon-button
+                    color="primary"
+                    matTooltip="Edit Doctor"
+                    (click)="editDoctor(doctor)">
+                    <mat-icon>edit</mat-icon>
+                  </button>
+
+                  <button
+                    mat-icon-button
+                    color="warn"
+                    matTooltip="Delete Doctor"
+                    (click)="deleteDoctor(doctor)">
+                    <mat-icon>delete</mat-icon>
+                  </button>
+
+                </div>
+              </td>
+            </ng-container>
+
+            <tr
+              mat-header-row
+              *matHeaderRowDef="displayedColumns; sticky: true">
+            </tr>
+
+            <tr
+              mat-row
+              *matRowDef="let row; columns: displayedColumns;">
+            </tr>
+
+          </table>
+
+        </div>
+
+      </mat-card-content>
+    </mat-card>
+
+  </div>
+
+</app-common-panel>

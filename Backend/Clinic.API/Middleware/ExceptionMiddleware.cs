@@ -39,16 +39,17 @@ public class ExceptionMiddleware
         Exception exception)
     {
         HttpStatusCode statusCode = exception switch
-        {
-            NotFoundException => HttpStatusCode.NotFound,
+{
+    NotFoundException => HttpStatusCode.NotFound,
 
-            ValidationException => HttpStatusCode.BadRequest,
+    DuplicateDoctorCodeException => HttpStatusCode.Conflict,
 
-            BusinessException => HttpStatusCode.BadRequest,
+    ValidationException => HttpStatusCode.BadRequest,
 
-            _ => HttpStatusCode.InternalServerError
-        };
+    BusinessException => HttpStatusCode.BadRequest,
 
+    _ => HttpStatusCode.InternalServerError
+};
         context.Response.ContentType = "application/json";
         context.Response.StatusCode = (int)statusCode;
 

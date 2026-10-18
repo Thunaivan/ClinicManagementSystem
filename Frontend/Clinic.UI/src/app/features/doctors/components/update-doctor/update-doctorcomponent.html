@@ -1,0 +1,94 @@
+
+
+<mat-card class="doctor-card">
+  <mat-card-header>
+    <mat-card-title>Update Doctor/Consultant</mat-card-title>
+  </mat-card-header>
+
+  <mat-card-content>
+    <form [formGroup]="doctorForm" (ngSubmit)="onSubmit()">
+
+      <div class="form-grid">
+        <mat-form-field appearance="outline">
+          <mat-label>Doctor Code</mat-label>
+          <input matInput formControlName="doctorCode" />
+          <mat-error>Doctor code is required.</mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+          <mat-label>First Name</mat-label>
+          <input matInput formControlName="firstName" />
+          <mat-error>First name is required.</mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+          <mat-label>Last Name</mat-label>
+          <input matInput formControlName="lastName" />
+          <mat-error>Last name is required.</mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+          <mat-label>Specialization</mat-label>
+          <input matInput formControlName="specialization" />
+          <mat-error>Specialization is required.</mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+          <mat-label>Registration Number</mat-label>
+          <input matInput formControlName="registrationNumber" />
+          <mat-error>Registration number is required.</mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+          <mat-label>Phone Number</mat-label>
+          <input matInput formControlName="phoneNumber" />
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+          <mat-label>Email</mat-label>
+          <input matInput type="email" formControlName="email" />
+          <mat-error>Enter a valid email address.</mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+          <mat-label>Experience (Years)</mat-label>
+          <input
+            matInput
+            type="number"
+            min="0"
+            max="60"
+            formControlName="experienceYears"
+          />
+          <mat-error>Experience must be between 0 and 60.</mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+          <mat-label>Departments</mat-label>
+          <mat-select formControlName="departmentIds" multiple>
+            <mat-option
+              *ngFor="let department of departments"
+              [value]="department.departmentId">
+              {{ department.departmentName }}
+            </mat-option>
+          </mat-select>
+          <mat-error>Select at least one department.</mat-error>
+        </mat-form-field>
+      </div>
+
+      <div class="form-actions">
+        <button mat-button type="button" (click)="cancel()">
+          Cancel
+        </button>
+
+        <button
+          mat-raised-button
+          color="primary"
+          type="submit"
+          [disabled]="doctorForm.invalid">
+          Update Doctor
+        </button>
+      </div>
+
+    </form>
+  </mat-card-content>
+</mat-card>

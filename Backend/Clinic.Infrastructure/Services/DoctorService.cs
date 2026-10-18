@@ -19,6 +19,13 @@ public class DoctorService : IDoctorService
 
     public async Task<Guid> CreateAsync(CreateDoctorDto dto)
     {
+      var exists = await _context.Doctors
+    .AnyAsync(d => d.DoctorCode == dto.DoctorCode);
+
+if (exists)
+{
+    throw new DuplicateDoctorCodeException();
+}
         var doctor = new Doctor
         {
             Id = Guid.NewGuid(),

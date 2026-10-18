@@ -1,0 +1,226 @@
+/* Page Layout */
+:host {
+  display: block;
+  height: 100%;
+}
+
+.doctor-page {
+  display: flex;
+  flex-direction: column;
+  flex: 1 1 auto;
+  min-height: 0;
+  padding: 6px 20px;
+  box-sizing: border-box;
+}
+
+/* Doctor Summary */
+.doctor-summary {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: #ffffff;
+  border-radius: 10px;
+  padding: 8px 14px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, .08);
+}
+
+.doctor-summary mat-icon {
+  width: 30px;
+  height: 30px;
+  font-size: 30px;
+}
+
+.doctor-summary div {
+  display: flex;
+  flex-direction: column;
+}
+
+.doctor-summary .count {
+  font-size: 22px;
+  font-weight: 700;
+  line-height: 1;
+}
+
+.doctor-summary small {
+  color: #6b7280;
+  font-size: 13px;
+}
+
+/* Toolbar */
+.toolbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 20px;
+}
+
+.search-box {
+  width: 360px;
+  max-width: 100%;
+}
+
+.search-box .mat-mdc-form-field-subscript-wrapper {
+  display: none;
+}
+
+/* Card */
+mat-card {
+  display: flex;
+  flex-direction: column;
+  flex: 1 1 auto;
+  min-height: 0;
+  border-radius: 14px;
+  overflow: hidden;
+}
+
+mat-card-content {
+  display: flex;
+  flex-direction: column;
+  flex: 1 1 auto;
+  min-height: 0;
+  padding: 0;
+  overflow: hidden;
+}
+
+/* Pagination */
+.top-paginator {
+  height: 48px;
+  flex: 0 0 auto;
+  overflow: hidden;
+}
+
+mat-paginator {
+  height: 48px;
+  border-top: 1px solid #e5e7eb;
+  flex-shrink: 0;
+}
+
+/* Table */
+.table-container {
+  flex: 1 1 auto;
+  min-height: 0;
+  overflow: auto;
+}
+
+table {
+  width: 100%;
+}
+
+.mat-mdc-header-row {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  height: 52px;
+  background: white;
+}
+
+.mat-mdc-row {
+  height: 56px;
+}
+
+.mat-mdc-header-cell,
+.mat-mdc-cell {
+  padding-top: 4px;
+  padding-bottom: 4px;
+}
+
+.mat-mdc-row:hover {
+  background: #f8fafc;
+}
+
+/* Column widths */
+.mat-column-doctor {
+  min-width: 220px;
+}
+
+.mat-column-specialization {
+  min-width: 160px;
+}
+
+.mat-column-phone {
+  width: 170px;
+}
+
+.mat-column-departments {
+  min-width: 180px;
+}
+
+.mat-column-actions {
+  width: 110px;
+  text-align: center;
+}
+
+/* Doctor Information */
+.doctor-info {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.doctor-avatar {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: #e8f0fe;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.doctor-avatar mat-icon {
+  color: #1976d2;
+}
+
+.doctor-details {
+  display: flex;
+  flex-direction: column;
+}
+
+.doctor-name {
+  font-weight: 600;
+  font-size: 15px;
+  color: #1f2937;
+}
+
+.doctor-details small {
+  font-size: 12px;
+  color: #6b7280;
+}
+
+/* Action Buttons */
+.action-buttons {
+  display: flex;
+  gap: 8px;
+}
+
+.action-buttons button {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  transition: .2s;
+}
+
+.action-buttons button:hover {
+  transform: scale(1.08);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .toolbar {
+    flex-direction: column;
+    align-items: stretch;
+    margin-bottom: 4px;
+  }
+
+  .search-box {
+    width: 100%;
+  }
+
+  .doctor-summary {
+    justify-content: center;
+  }
+
+  .doctor-page {
+    padding: 6px 10px;
+  }
+}
